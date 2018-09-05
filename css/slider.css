@@ -1,0 +1,64 @@
+.icon-wrapper {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 50;
+        padding: 8px;
+    }
+
+    .left {
+        left: 0;
+    }
+
+    .left:hover .fas {
+        transform :scale(1.2);
+    }
+
+    .right {
+        right: 0;
+    }
+
+    .right:hover .fas {
+        transform :scale(1.2);
+    }
+
+    .fas {
+        color: black;
+        font-size: 40px;
+        transition: all 0.2s;
+        backface-visibility: hidden;
+    }
+
+    .fa-angle-left {
+        left: 0;
+        transform-origin: right;
+    }
+
+    .fa-angle-right {
+        right: 0;
+        transform-origin: left;
+    }
+
+    .container img {
+        width: 100%;
+        margin: 0;
+        position: absolute;
+        transition: transform 0.3s;
+    }
+
+    .current {
+        z-index: 10;
+    }
+
+    .queue {
+        transform: translateX(100%);
+    }
+
+    .prev {
+        transform: translateX(-100%);
+
+    }
+
+    .hide {
+        opacity: 0;
+    }

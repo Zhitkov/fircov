@@ -1,0 +1,31 @@
+  @font-face {
+        font-family: 'Next Art';
+        src: local('./../fonts/NEXT ART SemiBold'), local('./../static/fonts/NEXTART-SemiBold'), url('./../static/fonts/Nextartsemibold.woff2') format('woff2'), url('./../static/fonts/Nextartsemibold.woff') format('woff'), url('./../static/fonts/Nextartsemibold.ttf') format('truetype');
+        font-weight: 600;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'Next Art';
+        src: local('./../static/fonts/NEXT ART Thin'), local('./../static/fonts/NEXTART-Thin'), url('./../static/fonts/Nextartthin.woff2') format('woff2'), url('./../static/fonts/Nextartthin.woff') format('woff'), url('./../static/fonts/Nextartthin.ttf') format('truetype');
+        font-weight: 200;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'Next Art';
+        src: local('./../static/fonts/NEXT ART Light'), local('./../static/fonts/NEXTART-Light'), url('./../static/fonts/Nextartlight.woff2') format('woff2'), url('./../static/fonts/Nextartlight.woff') format('woff'), url('./../static/fonts/Nextartlight.ttf') format('truetype');
+        font-weight: 300;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'Next Art';
+        src: local('./../static/fonts/NEXT ART Regular'), local('./../static/fonts/NEXTART-Regular'), url('./../static/fonts/Nextartregular.woff2') format('woff2'), url('./../static/fonts/Nextartregular.woff') format('woff'), url('./../static/fonts/Nextartregular.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'Next Art';
+        src: local('./../static/fonts/NEXT ART Bold'), local('./../static/fonts/NEXTART-Bold'), url('./../static/fonts/Nextartbold.woff2') format('woff2'), url('./../static/fonts/Nextartbold.woff') format('woff'), url('./../static/fonts/Nextartbold.ttf') format('truetype');
+        font-weight: 700;
+        font-style: normal;
+    }
+

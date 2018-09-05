@@ -1,0 +1,65 @@
+.ponti
+    {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        flex-direction: column;
+    }
+    .wow
+    {
+        color: #000;
+        font-family: 'Next Art';
+        font-weight: 600;
+        font-size: 6vw;
+        mask-mode: alpha;
+    }
+    .btn
+    {
+        background-color: #000;
+        color: #fff;
+        border:none;
+        width: 30vw;
+        height 70px !important;
+        font-family: 'Next Art';
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+
+
+    @keyframes moveIt
+    {
+        from {background-position: 0vh 1vh;}
+        to {background-position: 0vh 1000vh;}
+    }
+
+    .fog
+    {
+        background-color: rgba(255, 255, 255, 0.7);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .index-background
+    {
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100%;
+        background-position: center;
+        background: url('./../static/images/index-background.jpg') 100% 100% repeat-y;
+        background-size: cover;
+        margin: 0;
+        animation: moveIt 600s linear infinite;
+    }
