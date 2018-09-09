@@ -1,64 +1,130 @@
-.icon-wrapper {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 50;
-        padding: 8px;
-    }
+.flexbox-slider {
+  display: flex;
+  width: 100%;
+  height: 500px;
+  visibility: hidden;
+}
+.flexbox-slider .flexbox-slide {
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
+  transition-delay: 0s;
+  width: 33.333%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  visibility: visible;
+}
+.flexbox-slider .flexbox-slide:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  z-index: 2;
+  opacity: 0;
+}
+.flexbox-slider .flexbox-slide img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: auto;
+  width: auto;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+.flexbox-slider .flexbox-slide .text-block {
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+}
+.flexbox-slider .flexbox-slide .text-block h3 {
+  font-size: 20px;
+  font-weight: 700;
+}
+.flexbox-slider:hover .flexbox-slide:hover {
+  flex-shrink: 0;
+  width: 80%;
+}
+.flexbox-slider.flexbox-slider-1 .flexbox-slide .text-block {
+  bottom: 60px;
+}
+.flexbox-slider.flexbox-slider-1:hover .flexbox-slide:hover .text-block {
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+  transition-delay: 0.3s;
+  bottom: 30px;
+  opacity: 1;
+  visibility: visible;
+}
+/*/desc*/
+.desc-container{
+    padding-left: 10vw;
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+.desc-title{
+    text-align: center;
+    font-family: "Next Art";
+}
+.des-descript{
+    text-indent: 20px;
+    margin-bottom: 0;
+    margin-top: 5px;
+    line-height: 1.3;
+}
+#sticky {
+    font-family: "Next Art";          
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
 
-    .left {
-        left: 0;
-    }
+canvas {
+	width: 100%;
+	height: 100px;
+	vertical-align:top;
+}
+@media only screen and (max-width: 640px) {
+	canvas {
+		height: 200px;
+	}
 
-    .left:hover .fas {
-        transform :scale(1.2);
-    }
-
-    .right {
-        right: 0;
-    }
-
-    .right:hover .fas {
-        transform :scale(1.2);
-    }
-
-    .fas {
-        color: black;
-        font-size: 40px;
-        transition: all 0.2s;
-        backface-visibility: hidden;
-    }
-
-    .fa-angle-left {
-        left: 0;
-        transform-origin: right;
-    }
-
-    .fa-angle-right {
-        right: 0;
-        transform-origin: left;
-    }
-
-    .container img {
-        width: 100%;
-        margin: 0;
-        position: absolute;
-        transition: transform 0.3s;
-    }
-
-    .current {
-        z-index: 10;
-    }
-
-    .queue {
-        transform: translateX(100%);
-    }
-
-    .prev {
-        transform: translateX(-100%);
-
-    }
-
-    .hide {
-        opacity: 0;
-    }
+}
+.footer-title{
+    width: 100%;
+    text-align: center;
+    font-family: "Next Art";
+    color: white;
+    background-color: black;
+    font-size: 18px;
+}
+h5{
+    margin: 0
+}
+.desc-img{
+    background-image: url("https://funsochi.ru/sites/default/files/styles/watermark_fun/public/neprostobanya_2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    width: 100%;
+    height: 30vw;
+}

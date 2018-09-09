@@ -1,75 +1,57 @@
-let slider = {
-        quantity: 5,
-        images: [],
-        initQueue: [],
-        DOM: {
-            left: document.querySelector('.left'),
-            right: document.querySelector('.right')
-        },
-        addListeners: function () {
-            this.DOM.right.addEventListener('click', () => this.forward());
-            this.DOM.left.addEventListener('click', () => this.backward());
-        },
-        imgArr: function () {
-            for (let i = 0; i < this.quantity; i++) {
-                this.images.push({ name: `img${i}`, state: i });
-            }
-            this.initQueue = this.images.slice(1, -1);
-        },
-        initPos: function () {
-            document.getElementById('img0').classList.add('current');
-            document.getElementById('img' + this.images[this.lastImage - 1].state).classList.add('hide');
-            document.getElementById('img' + this.images[this.lastImage].state).classList.add('prev');
-            for (let i = 0; i < this.initQueue.length; i++) {
-                document.getElementById('img' + this.initQueue[i].state).classList.add('queue');
-            }
-        },
-        forward: function () {
-            document.getElementById('img' + this.images[0].state).classList.remove('current');
-            document.getElementById('img' + this.images[0].state).classList.add('prev');
-            document.getElementById('img' + this.images[1].state).classList.remove('hide');
-            document.getElementById('img' + this.images[1].state).classList.remove('queue');
-            document.getElementById('img' + this.images[1].state).classList.add('current');
-            document.getElementById('img' + this.images[this.lastImage].state).classList.add('hide');
-            document.getElementById('img' + this.images[this.lastImage].state).classList.remove('prev');
-            document.getElementById('img' + this.images[this.lastImage].state).classList.add('queue');
-            slider.stateUp()
-        },
-        backward: function () {
-            document.getElementById('img' + this.images[0].state).classList.remove('current');
-            document.getElementById('img' + this.images[0].state).classList.add('queue');
-            document.getElementById('img' + this.images[this.lastImage - 1].state).classList.add('hide');
-            document.getElementById('img' + this.images[this.lastImage - 1].state).classList.remove('queue');
-            document.getElementById('img' + this.images[this.lastImage - 1].state).classList.add('prev');
-            document.getElementById('img' + this.images[this.lastImage].state).classList.remove('hide');
-            document.getElementById('img' + this.images[this.lastImage].state).classList.remove('prev');
-            document.getElementById('img' + this.images[this.lastImage].state).classList.add('current');
-            slider.stateDown()
-        },
-        stateUp: function () {
-            for (let i = 0; i < this.quantity; i++) {
-                if (this.images[i].state < this.quantity - 1) {
-                    this.images[i].state = this.images[i].state + 1;
-                } else {
-                    this.images[i].state = 0;
-                }
-            }
-        },
-        stateDown: function () {
-            for (let i = 0; i < this.quantity; i++) {
-                if (this.images[i].state > 0) {
-                    this.images[i].state = this.images[i].state - 1;
-                } else {
-                    this.images[i].state = this.lastImage;
-                }
-            }
-        },
-        sliderInit: function () {
-            this.lastImage = this.quantity - 1;
-            this.addListeners();
-            this.imgArr();
-            this.initPos();
-        }
-    }
+(function(){
 
-    slider.sliderInit();
+	var unit = 100;
+	var canvas, context, canvas2, context2,height, width, xAxis, yAxis, draw;
+
+	function init() {
+		canvas = document.getElementById("sineCanvas");
+		canvas.width = document.documentElement.clientWidth;
+		canvas.height = 300;
+		context = canvas.getContext("2d");
+		height = canvas.height;
+		width = canvas.width;
+		xAxis = Math.floor(height/2);
+		yAxis = 0;
+
+		draw();
+	}
+	function draw(){
+		context.clearRect(0, 0, width, height);
+
+		drawWave('#000000', 1, 3, 0);
+
+		// Update the time and draw again
+		draw.seconds = draw.seconds + .009;
+		draw.t = draw.seconds*Math.PI;
+		setTimeout(draw, 35);
+	};
+	draw.seconds = 0;
+	draw.t = 0;
+
+	function drawWave(fillcolor, alpha, zoom, delay) {
+		context.fillStyle = fillcolor;
+		context.globalAlpha = alpha;
+
+		context.beginPath(); 
+		drawSine(draw.t / 0.5, zoom, delay);
+		context.lineTo(width + 10, height); 
+		context.lineTo(0, height); 
+		context.closePath() 
+		context.fill(); 
+	}
+
+	function drawSine(t, zoom, delay) {
+		var x = t; 
+		var y = Math.sin(x)/zoom;
+		context.moveTo(yAxis, unit*y+xAxis);
+
+		for (i = yAxis; i <= width + 10; i += 10) {
+			x = t+(-yAxis+i)/unit/zoom;
+			y = Math.sin(x - delay)/3;
+			context.lineTo(i, unit*y+xAxis);
+		}
+	}
+
+	init();
+
+})();
