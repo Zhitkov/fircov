@@ -1,57 +1,56 @@
-(function(){
+console.clear();
 
-	var unit = 100;
-	var canvas, context, canvas2, context2,height, width, xAxis, yAxis, draw;
-
-	function init() {
-		canvas = document.getElementById("sineCanvas");
-		canvas.width = document.documentElement.clientWidth;
-		canvas.height = 300;
-		context = canvas.getContext("2d");
-		height = canvas.height;
-		width = canvas.width;
-		xAxis = Math.floor(height/2);
-		yAxis = 0;
-
-		draw();
+class Slider {
+	
+	constructor($el) {
+		this.$el = $el;
+		this.$refs = {
+			items: [... document.querySelectorAll('[data-slider]', this.$el)],
+		};
+		this.length = this.$refs.items.length-1;
 	}
-	function draw(){
-		context.clearRect(0, 0, width, height);
-
-		drawWave('#000000', 1, 3, 0);
-
-		// Update the time and draw again
-		draw.seconds = draw.seconds + .009;
-		draw.t = draw.seconds*Math.PI;
-		setTimeout(draw, 35);
-	};
-	draw.seconds = 0;
-	draw.t = 0;
-
-	function drawWave(fillcolor, alpha, zoom, delay) {
-		context.fillStyle = fillcolor;
-		context.globalAlpha = alpha;
-
-		context.beginPath(); 
-		drawSine(draw.t / 0.5, zoom, delay);
-		context.lineTo(width + 10, height); 
-		context.lineTo(0, height); 
-		context.closePath() 
-		context.fill(); 
+	
+	next() {
+		this.slide('next');
 	}
-
-	function drawSine(t, zoom, delay) {
-		var x = t; 
-		var y = Math.sin(x)/zoom;
-		context.moveTo(yAxis, unit*y+xAxis);
-
-		for (i = yAxis; i <= width + 10; i += 10) {
-			x = t+(-yAxis+i)/unit/zoom;
-			y = Math.sin(x - delay)/3;
-			context.lineTo(i, unit*y+xAxis);
+	
+	prev() {
+		this.slide('prev');
+	}
+	
+	slide(direction){
+		this.$refs.items.map(el => {
+			const pos = Number(el.getAttribute('data-position'));
+			const next = (pos+1) > this.length ? 0 : pos+1;
+			const prev = (pos-1) < 0 ? this.length : pos-1;
+			const go = direction == "next" ? next : prev;
+			
+			el.setAttribute('data-position', go)
+		})
+	}
+	
+	jump(pos){
+		for(let i = 0; i < pos; i++) {
+			const timeout = setTimeout(()=>{
+				this.slide('prev')
+			}, 100)
 		}
 	}
+	
+};
 
-	init();
+const slider = new Slider(document.querySelector('[data-component="slider"]'));
 
-})();
+document.querySelector('.arrow--prev').addEventListener('click', ()=>{
+	slider.next()
+})
+document.querySelector('.arrow--next').addEventListener('click', ()=>{
+	slider.prev()
+})
+document.querySelectorAll('.slider__item').forEach(sliderItem => {
+	sliderItem.addEventListener('click', ()=>{
+		const pos = Number(sliderItem.getAttribute("data-position"));
+		
+		slider.jump(pos)
+	})
+})
